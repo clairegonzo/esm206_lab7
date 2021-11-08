@@ -15,6 +15,7 @@ library(GGally)
 library(broom)
 library(kableExtra)
 library(modelsummary)
+library(stargazer)
 ```
 
 
@@ -125,3 +126,36 @@ penguin_lm_v2
 Given this equation, we can see that the reference levels are **Adelie** for species and **female** for sex.
 
 Ex: "If everything else stayed constant, on average we would expect the body mass of a Gentoo penguin to be 836.3 g more than that of an Adelie penguin"
+
+
+### Use broom::augment() to see predicted values
+
+```{r}
+augment(penguin_lm_v2)
+
+?broom::augment.lm()
+```
+
+
+## Use plot() to look at model diagnostics
+
+```{r}
+
+# Something about residuals? Gives you 4 diagnostic plots
+plot(penguin_lm_v2)
+
+```
+
+## Predictor variables
+This is confusing for me but essentially you have to figure out which variables are the most reasonable predictor variables. In this lab we have been using species, sex and flipper length as predictor variables and those are good predictor variables for this data. Some of the diagnostic graphs above help with this. Allison says we should be thinking "really hard" about this *shrug*
+
+```{r}
+# Easy way to view things in your model
+modelsummary(penguin_lm_v2)
+```
+
+```{r, results='asis'}
+# THIS DOESNT
+stargazer(penguin_lm_v2, type = "html")
+```
+
