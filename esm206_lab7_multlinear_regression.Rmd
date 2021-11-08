@@ -23,15 +23,19 @@ library(modelsummary)
 Use GGally::ggpairs() funciton to create a pairs plot.
 ```{r}
 # this takes a while to run becuase it gives you so many things
-ggpairs(penguins)
+# ggpairs(penguins)
+
+# I added the # so that it didn't run every time because it takes forever to knit
 ```
 
 ```{r}
 # So now we are going to do this in a more focused way
 
-penguins %>% 
-  select(species, bill_length_mm:body_mass_g) %>% 
-  ggpairs(aes(color = species))
+#penguins %>% 
+  #select(species, bill_length_mm:body_mass_g) %>% 
+  #ggpairs(aes(color = species))
+
+# I added the # so that it didn't run every time because it takes forever to knit
 
 # This gives a plot with only the things we 'selected' so it's easier to read
 
@@ -96,3 +100,28 @@ penguin_lm_glance
 # This might be a little easier to pull values from for in-line code purposes
 ```
 
+
+## Try another model
+
+Three most ciritcal variables to include in the model are:
+
+- flipper length
+- species
+- sex
+
+Task: create a multiple linear regression model using those 3 predictor variables
+
+Then take a look at the model outputs and interpret the coeficients with a neighbor
+
+```{r}
+# taken from above: penguin_lm <- lm(body_mass_g ~ flipper_length_mm + bill_depth_mm, data = penguins)
+
+penguin_lm_v2 <- lm(body_mass_g ~ flipper_length_mm + species + sex, data = penguins)
+
+penguin_lm_v2
+
+```
+
+Given this equation, we can see that the reference levels are **Adelie** for species and **female** for sex.
+
+Ex: "If everything else stayed constant, on average we would expect the body mass of a Gentoo penguin to be 836.3 g more than that of an Adelie penguin"
